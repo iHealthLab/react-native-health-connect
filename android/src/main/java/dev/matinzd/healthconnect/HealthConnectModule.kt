@@ -17,6 +17,11 @@ class HealthConnectModule internal constructor(context: ReactApplicationContext)
   }
 
   @ReactMethod
+  fun installSdk(providerPackageName: String) {
+    return manager.installSdk(providerPackageName)
+  }
+
+  @ReactMethod
   override fun openHealthConnectSettings() {
     manager.openHealthConnectSettings()
   }

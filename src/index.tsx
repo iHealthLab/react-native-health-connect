@@ -66,6 +66,16 @@ export function getSdkStatus(
 }
 
 /**
+ * Optionally redirect to package installer to find a provider
+ * @param providerPackageName the package name of the Health Connect provider
+ */
+export function installSdk(
+  providerPackageName = DEFAULT_PROVIDER_PACKAGE_NAME
+): void {
+  return HealthConnect.installSdk(providerPackageName);
+}
+
+/**
  * Initializes the Health Connect SDK
  * @param providerPackageName the package name of the Health Connect provider
  * @returns true if the SDK was initialized successfully

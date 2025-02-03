@@ -1,6 +1,7 @@
 package dev.matinzd.healthconnect
 
 import android.content.Intent
+import android.net.Uri
 import androidx.health.connect.client.HealthConnectClient
 import androidx.health.connect.client.changes.DeletionChange
 import androidx.health.connect.client.changes.UpsertionChange
@@ -53,6 +54,19 @@ class HealthConnectManager(private val applicationContext: ReactApplicationConte
     val status = HealthConnectClient.getSdkStatus(applicationContext, providerPackageName)
     return promise.resolve(status)
   }
+
+  fun installSdk(providerPackageName: String) {
+    val uriString = "market://details?id=$providerPackageName&url=healthconnect%3A%2F%2Fonboarding"
+    applicationContext.currentActivity?.startActivity(
+      Intent(Intent.ACTION_VIEW).apply {
+        setPackage("com.android.vending")
+        data = Uri.parse(uriString)
+        putExtra("overlay", true)
+        putExtra("callerId", applicationContext.packageName)
+      }
+    )
+  }
+
 
   fun initialize(providerPackageName: String, promise: Promise) {
     try {
